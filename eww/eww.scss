@@ -1,0 +1,43 @@
+$base_color: #1e1e2e;
+$accent_color: #f5c2e7;
+$text_color: #cdd6f4;
+$border_radius: 8px;
+
+* {
+    all: unset;
+}
+
+.button {
+    background-color: $accent_color;
+    border-radius: $border_radius;
+    color: $base_color;
+}
+
+.topbar {
+    background-color: $base_color;
+    color: $text_color;
+}
+
+.startmenu-icon {
+    padding: 0 20px;
+    font-size: 24px;
+    @extend .button;
+}
+
+.clock {
+    font-weight: 600;
+    // Basically the clock pads the whole thing lol
+    padding: 10px;
+}
+
+.lowbattoverlay {
+    background-color: $base_color;
+    border: 2px $accent_color solid;
+    color: $text_color;
+    padding: 10px;
+}
+
+.lowbattoverlay__okbutton label {
+    @extend .button;
+    padding: 10px;
+}

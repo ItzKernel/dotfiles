@@ -1,0 +1,10 @@
+{
+    "suggest.noselect": true,
+    "languageserver": {
+        "c": {
+            "command": "clangd",
+            "trace.server": "verbose",
+            "filetypes": ["c", "h"]
+        }
+    }
+}

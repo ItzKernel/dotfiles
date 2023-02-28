@@ -1,0 +1,92 @@
+(defpoll datetime
+    :interval "1s"
+    :initial ""
+`date '+%Y-%m-%d %H:%M'`)
+
+(defpoll battery
+    :interval "5s"
+    :initial ""
+'echo $(cat /sys/class/power_supply/BAT0/capacity)%')
+
+(defpoll cputemp
+    :interval "2s"
+    :initial ""
+`sensors | awk '/CPU/ { print $2 }'`)
+
+(deflisten lowbattery
+    :initial "0"
+    `if [[ $(cat /sys/class/power_supply/BAT0/capacity) -lt 20 ]]; then echo "1"; else echo "0"; fi`)
+
+; (defwidget hoverreveal 
+
+
+(defwidget start []
+    (centerbox
+        :class "topbar bruh"
+        :orientation "horizontal"
+        (box
+            :space-evenly false
+            (label
+                :class "startmenu-icon"
+                :text ""
+            )
+        )
+        (label
+            :class "clock"
+            :text lowbattery
+        )
+        ;TODO: use centerbox first element because thats a legit way of aligning to end
+        (centerbox
+            (box)
+            (box)
+            (box
+                :space-evenly false
+                :spacing 50
+                :halign "end"
+                battery
+                cputemp
+            )
+        )
+    )
+)
+
+(defwindow topbar
+    :monitor 0
+    :geometry (geometry
+        :x "0%"
+        :y "0px"
+        :width "100%"
+        ; :height "30px"
+        :anchor "top center")
+    :stacking "fg"
+    :windowtype "dock"
+    :exclusive true
+    :wm-ignore true
+(start))
+
+(defwidget lowbattwidget []
+    (box
+        :class "lowbattoverlay"
+        :orientation "vertical"
+        :spacing "5"
+
+        "The battery percentage is low. Please a kurva anyad."
+        (eventbox
+            :class "lowbattoverlay__okbutton"
+            :onclick `${EWW_CMD} close lowbattalert`
+            "Ok"
+        )
+    )
+)
+
+(defwindow lowbattalert
+    :monitor 0
+    :geometry (geometry
+        ; :width "50%"
+        ; :height "50%"
+        :anchor "center center"
+    )
+    :stacking "overlay"
+    ; :focusable true
+(lowbattwidget))
+
