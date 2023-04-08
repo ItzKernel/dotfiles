@@ -3,19 +3,19 @@
     :initial ""
 `date '+%Y-%m-%d %H:%M'`)
 
-(defpoll battery
-    :interval "5s"
-    :initial ""
-'echo $(cat /sys/class/power_supply/BAT0/capacity)%')
+;(defpoll battery
+;    :interval "5s"
+;    :initial ""
+;'echo $(cat /sys/class/power_supply/BAT0/capacity)%')
 
 (defpoll cputemp
     :interval "2s"
     :initial ""
-`sensors | awk '/CPU/ { print $2 }'`)
+`sensors | awk '/CPU Temperature:/ { print $3 }'`)
 
-(deflisten lowbattery
-    :initial "0"
-    `if [[ $(cat /sys/class/power_supply/BAT0/capacity) -lt 20 ]]; then echo "1"; else echo "0"; fi`)
+;(deflisten lowbattery
+;    :initial "0"
+;    `if [[ $(cat /sys/class/power_supply/BAT0/capacity) -lt 20 ]]; then echo "1"; else echo "0"; fi`)
 
 ; (defwidget hoverreveal 
 
@@ -33,7 +33,7 @@
         )
         (label
             :class "clock"
-            :text lowbattery
+            :text datetime
         )
         ;TODO: use centerbox first element because thats a legit way of aligning to end
         (centerbox
@@ -43,7 +43,7 @@
                 :space-evenly false
                 :spacing 50
                 :halign "end"
-                battery
+                ;battery
                 cputemp
             )
         )

@@ -1,0 +1,4 @@
+show=drun
+insensitive=true
+term=kitty
+no_actions=true

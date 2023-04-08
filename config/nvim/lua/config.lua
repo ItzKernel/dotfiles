@@ -24,3 +24,4 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
 require("nvim-tree").setup()
 require("colorizer").setup()
 require("startup").setup()
+require("nvim-autopairs").setup {}

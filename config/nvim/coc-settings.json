@@ -5,6 +5,11 @@
             "command": "clangd",
             "trace.server": "verbose",
             "filetypes": ["c", "h"]
+        },
+        "cpp": {
+            "command": "clangd",
+            "trace.server": "verbose",
+            "filetypes": ["cpp", "hpp"]
         }
     }
 }

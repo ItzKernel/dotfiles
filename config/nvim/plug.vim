@@ -11,6 +11,7 @@ Plug 'elkowar/yuck.vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'startup-nvim/startup.nvim'
+Plug 'windwp/nvim-autopairs'
 
 call plug#end()
 
