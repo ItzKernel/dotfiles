@@ -22,7 +22,7 @@
 
 (defwidget start []
     (centerbox
-        :class "topbar bruh"
+        :class "topbar"
         :orientation "horizontal"
         (box
             :space-evenly false
@@ -36,15 +36,16 @@
             :text datetime
         )
         ;TODO: use centerbox first element because thats a legit way of aligning to end
-        (centerbox
-            (box)
-            (box)
+        (box
+            :class "stats"
+            :halign "end"
+            (box "asd")
+            "|"
             (box
-                :space-evenly false
                 :spacing 50
-                :halign "end"
-                ;battery
-                cputemp
+                (label
+                  :text `${EWW_TEMPS["ASUS_WMI_SENSORS_CPU_TEMPERATURE"]} °C`
+                )
             )
         )
     )
@@ -70,10 +71,12 @@
         :orientation "vertical"
         :spacing "5"
 
-        "The battery percentage is low. Please a kurva anyad."
+        EWW_TEMPS
+        ; "The battery percentage is low. Please a kurva anyad."
         (eventbox
             :class "lowbattoverlay__okbutton"
-            :onclick `${EWW_CMD} close lowbattalert`
+            ; :onclick `${EWW_CMD} close lowbattalert`
+            :onclick `echo ${EWW_TEMPS} > ~/xd`
             "Ok"
         )
     )

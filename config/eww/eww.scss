@@ -30,6 +30,11 @@ $border_radius: 8px;
     padding: 10px;
 }
 
+.stats > * {
+    padding: 10px;
+}
+
+/*
 .lowbattoverlay {
     background-color: $base_color;
     border: 2px $accent_color solid;
@@ -41,3 +46,4 @@ $border_radius: 8px;
     @extend .button;
     padding: 10px;
 }
+*/
