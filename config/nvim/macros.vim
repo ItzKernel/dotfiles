@@ -14,3 +14,18 @@ nnoremap <Up> <Esc>:qa!<CR>
 nnoremap <Down> <Esc>:qa!<CR>
 nnoremap <Left> <Esc>:qa!<CR>
 nnoremap <Right> <Esc>:qa!<CR>
+
+function Semicolonshit()
+    let pos = getpos('.')
+    let currentMode = mode()
+    " startinsert!
+    " call feedkeys(';')
+    norm A;
+
+    call mode(currentMode)
+    call setpos('.', pos)
+endfunction
+
+command Semi :call Semicolonshit()
+
+map <C-;> :Semi<CR>

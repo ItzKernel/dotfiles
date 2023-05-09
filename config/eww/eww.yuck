@@ -1,48 +1,131 @@
+; _  _ ____ ____ ____ 
+; |  | |__| |__/ [__  
+;  \/  |  | |  \ ___]
+
+(defvar temp_shown false)
+(defvar vol_shown false)
+
+; ___  ____ _    _    ____ 
+; |__] |  | |    |    [__  
+; |    |__| |___ |___ ___] 
 (defpoll datetime
     :interval "1s"
     :initial ""
-`date '+%Y-%m-%d %H:%M'`)
-
-;(defpoll battery
-;    :interval "5s"
-;    :initial ""
-;'echo $(cat /sys/class/power_supply/BAT0/capacity)%')
+`date '+%Y %b %d | %H:%M'`)
 
 (defpoll cputemp
     :interval "2s"
     :initial ""
 `sensors | awk '/CPU Temperature:/ { print $3 }'`)
 
-;(deflisten lowbattery
-;    :initial "0"
-;    `if [[ $(cat /sys/class/power_supply/BAT0/capacity) -lt 20 ]]; then echo "1"; else echo "0"; fi`)
+(defwidget menu_button []
+    (eventbox
+        :cursor "pointer"
+        :onclick "eww open menu"
 
-; (defwidget hoverreveal 
+        (label
+            :class "startmenu-icon"
+            :text ""
+        )
+    )
+)
+
+(defwidget workspace_switcher [name]
+    (eventbox
+        :cursor "pointer"
+        :onclick `hyprctl dispatch workspace ${name}`
+        ""
+    )
+)
+
+(defwidget clock []
+    (label
+        :class "clock"
+        :text datetime
+    )
+)
+
+(defwidget hoverreveal [icon ?icon_class var_name var]
+    (box
+        :space-evenly false
+        ;:spacing 5
+
+        (eventbox
+            :onhover `eww update ${var_name}=true`
+            :onhoverlost `eww update ${var_name}=false`
+
+            (box
+                :space-evenly false
+                :spacing 3
+
+                (label
+                    :class icon_class
+                    :text icon
+                )
+                (revealer
+                    :transition "slideright" 
+                    :reveal var
+                    :duration "550ms"
+
+                    (children)
+                )
+            )
+        )
+    )
+)
 
 
 (defwidget start []
     (centerbox
         :class "topbar"
         :orientation "horizontal"
+
         (box
             :space-evenly false
-            (label
-                :class "startmenu-icon"
-                :text ""
+            :spacing 5
+
+            (menu_button)
+            (box
+                :class "workspaces"
+                :spacing 5
+
+                (workspace_switcher :name 1)
+                (workspace_switcher :name 2)
+                (workspace_switcher :name 3)
+                (workspace_switcher :name 4)
+                (workspace_switcher :name 5)
             )
         )
-        (label
-            :class "clock"
-            :text datetime
-        )
-        ;TODO: use centerbox first element because thats a legit way of aligning to end
+        (clock)
         (box
             :class "stats"
             :halign "end"
-            (box "asd")
-            "|"
-            (box
-                :spacing 50
+            :space-evenly false
+            :spacing 15
+
+            (hoverreveal
+                :icon "󰕾"
+                :var vol_shown
+                :var_name "vol_shown"
+
+                (eventbox
+                    :cursor "pointer"
+
+                    (scale
+                        :class "scale"
+                        :min 0
+                        :max 100
+                        :orientation "h"
+                        :onchange `pactl set-sink-volume @DEFAULT_SINK@ {}%`
+                        :flipped false
+                    )
+                )
+            )
+            (hoverreveal
+                :icon ""
+                :var temp_shown
+                :var_name "temp_shown"
+
                 (label
                   :text `${EWW_TEMPS["ASUS_WMI_SENSORS_CPU_TEMPERATURE"]} °C`
                 )
@@ -65,31 +148,40 @@
     :wm-ignore true
 (start))
 
-(defwidget lowbattwidget []
+(defwidget menu []
     (box
-        :class "lowbattoverlay"
-        :orientation "vertical"
-        :spacing "5"
+        :space-evenly false
+        :orientation "v"
+        :spacing 10
+        
+        (box
+            :orientation "v"
+            (label
+                :text "ItzKernel"
+            )
+        )
 
-        EWW_TEMPS
-        ; "The battery percentage is low. Please a kurva anyad."
         (eventbox
-            :class "lowbattoverlay__okbutton"
-            ; :onclick `${EWW_CMD} close lowbattalert`
-            :onclick `echo ${EWW_TEMPS} > ~/xd`
-            "Ok"
+            :onclick "eww close menu"
+            :cursor "pointer"
+
+            (label
+                :class "menubox"
+                :text ""
+            )
         )
     )
 )
 
-(defwindow lowbattalert
+(defwindow menu
     :monitor 0
     :geometry (geometry
-        ; :width "50%"
-        ; :height "50%"
+        :width "70%"
+        :height "50%"
         :anchor "center center"
     )
     :stacking "overlay"
-    ; :focusable true
-(lowbattwidget))
-
+    :focusable true 
+(menu
+    :class "menu"
+))

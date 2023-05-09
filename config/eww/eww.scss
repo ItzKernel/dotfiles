@@ -1,10 +1,14 @@
 $base_color: #1e1e2e;
+$surface_0: #313244;
 $accent_color: #f5c2e7;
 $text_color: #cdd6f4;
 $border_radius: 8px;
 
 * {
     all: unset;
+    
+    // Penis
+    font-family: "Noto Sans Nerd Font";
 }
 
 .button {
@@ -24,26 +28,46 @@ $border_radius: 8px;
     @extend .button;
 }
 
+.workspaces {
+    background-color: $surface_0;
+    border-radius: 100px;
+    padding: 0 10px;
+    margin: 7px;
+}
+
+scale trough {
+    background-color: red;
+    border-radius: 5px;
+    min-height: 10px;
+    min-width: 100px;
+    margin: .3rem 0 .3rem 0;
+}
+
+.scale trough {
+    background-color: $surface_0;
+}
+
+.scale trough highlight {
+    background-color: $accent_color;
+    border-radius: 5px;
+}
+
 .clock {
     font-weight: 600;
     // Basically the clock pads the whole thing lol
     padding: 10px;
 }
 
-.stats > * {
+.stats {
     padding: 10px;
 }
 
-/*
-.lowbattoverlay {
-    background-color: $base_color;
-    border: 2px $accent_color solid;
-    color: $text_color;
-    padding: 10px;
+.menu {
+    background-color: transparent;
 }
 
-.lowbattoverlay__okbutton label {
-    @extend .button;
-    padding: 10px;
+.menubox {
+    background-color: $accent_color;
+    color: black;
+    padding: 100px;
 }
-*/
