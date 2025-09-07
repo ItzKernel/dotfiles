@@ -1,0 +1,129 @@
+$zinc-50: #fafafa;
+$zinc-100: #f4f4f5;
+$zinc-200: #e4e4e7;
+$zinc-300: #d4d4d8;
+$zinc-400: #a1a1aa;
+$zinc-500: #71717a;
+$zinc-600: #52525b;
+$zinc-700: #3f3f46;
+$zinc-800: #27272a;
+$zinc-900: #18181b;
+$zinc-950: #09090b;
+
+* {
+  all: unset;
+  font-family: Lato;
+  font-style: normal;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.symbol {
+  font-family: "Symbols Nerd Font Mono";
+}
+
+.icon {
+  font-size: 24px;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.bar {
+  padding: 8px 16px;
+  background-color: $zinc-950;
+  color: $zinc-200;
+}
+
+.cpanel {
+  background-color: $zinc-950;
+  border-radius: 10px;
+  color: $zinc-200;
+  padding: 24px;
+
+  .Title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .SubsectionTitle {
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
+
+.ControlContainer {
+  background-color: $zinc-900;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.Calendar {
+  background-color: $zinc-950;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.StatBox {
+  padding: 10px;
+  background-color: $zinc-800;
+  border-radius: 10px;
+}
+
+.StatBox-label {
+  font-size: 24px;
+}
+
+.OptionButton {
+  border-radius: 10px;
+  background-color: $zinc-800;
+  color: $zinc-500;
+
+  &--enabled {
+    background-color: $zinc-300;
+    color: $zinc-900;
+  }
+}
+
+.OptionButton-label {
+  font-size: 24px;
+}
+
+.Time {
+  font-size: 64px;
+  font-weight: bold;
+}
+
+.Date {
+  color: $zinc-400;
+}
+
+.Battery {
+  border-radius: 10px;
+  background-color: $zinc-300;
+  color: $zinc-900;
+  padding: 10px;
+}
+
+.Battery-symbol {
+  font-size: 32px;
+}
+
+.Battery-percentage {
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.Battery-name {
+  color: $zinc-500;
+}
+
+progressbar {
+  background-color: $zinc-400;
+  border-radius: 10px;
+}
+
+progressbar progress {
+  background-color: $zinc-900;
+}

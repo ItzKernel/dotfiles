@@ -1,0 +1,42 @@
+(defwidget battlowwidget []
+  (box
+    :valign "start"
+    :halign "fill"
+    :orientation "vertical"
+    :space-evenly false
+    :spacing 10
+
+    (centerbox
+      :halign "fill"
+      :valign "start"
+      :space-evenly "false"
+      (label
+        :class "Title"
+        :text "Control Panel"
+	:halign "start"
+      )
+      (box)
+      (button
+        :onclick "eww close battlow"
+
+        (label
+          :class "symbol"
+          :text "󰅖"
+          :halign "end"
+        )
+      )
+    )
+    (box)
+    (box)
+  )
+)
+
+(defwindow battlow
+  :monitor 0
+  :geometry (geometry
+    :height "300px"
+    :width "600px"
+    :anchor "center center")
+  :stacking "fg"
+  :wm-ignore true
+(battlowwidget))

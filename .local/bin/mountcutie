@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -d '/media/cutie' ]; then
+	umount /media/cutie
+	cryptsetup luksClose cutie
+	rm -d /media/cutie
+else
+	mkdir /media/cutie
+	cryptsetup luksOpen --header /home/user/header-cutie.img /dev/disk/by-partuuid/011ad286-02 cutie
+	# mount -o uuid=1000,gid=1000 -t exfat /dev/mapper/cutie /media/cutie
+	mount -o gid=storage,fmask=007,dmask=007 -t exfat /dev/mapper/cutie /media/cutie
+fi

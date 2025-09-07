@@ -1,0 +1,235 @@
+(defwidget cpanelwidget []
+  (box
+    :valign "start"
+    :halign "fill"
+    :orientation "vertical"
+    :space-evenly false
+    :spacing 10
+
+    (centerbox
+      :halign "fill"
+      :valign "start"
+      :space-evenly "false"
+      (label
+        :class "Title"
+        :text "Control Panel"
+	:halign "start"
+      )
+      (box)
+      (button
+        :onclick "eww close cpanel"
+
+        (label
+          :class "symbol"
+          :text "󰅖"
+          :halign "end"
+        )
+      )
+    )
+    (box)
+    (box
+      :class "ControlContainer"
+      :spacing 20
+      :height 150
+      :orientation "vertical"
+      :space-evenly false
+
+      (box
+        :orientation "vertical"
+        :valign "end"
+        :space-evenly false
+
+        (label
+          :halign "start"
+          :text "19:17"
+          :class "Time"
+        )
+        (label
+          :halign "start"
+          :text "2020 Jan 21"
+          :class "Date"
+        )
+      )
+      (box
+        :class "Calendar"
+	:style "font-family: monospace;"
+
+        (calendar)
+      )
+    )
+    (box)
+
+    (label
+      :class "SubsectionTitle"
+      :text "Resource Monitor"
+      :halign "start"
+    )
+    (box
+      :class "ControlContainer"
+      :spacing 10
+
+      (box
+        :height 100
+        :class "StatBox"
+
+	(circular-progress
+          :value 75
+	  :start-at 75
+	  :thickness 10
+
+	  (label
+            :class "symbol StatBox-label"
+	    :text "󰚗"
+	  )
+	)
+      )
+      (box
+        :height 100
+        :class "StatBox"
+	(circular-progress
+          :value 50
+	  :start-at 75
+	  :thickness 10
+	  (label
+            :class "symbol StatBox-label"
+	    :text "󰍛"
+	  )
+	)
+      )
+    )
+    (box)
+
+    (label
+      :class "SubsectionTitle"
+      :text "Quick Actions"
+      :halign "start"
+    )
+    (box
+      :class "ControlContainer"
+      :spacing 10
+
+      (box
+        :height 100
+        :class "OptionButton OptionButton--enabled"
+        (label
+	  :class "symbol OptionButton-label"
+          :text "󰖩"
+	)
+      )
+      (box
+        :class "OptionButton"
+        (label
+	  :class "symbol OptionButton-label"
+          :text "󰂯"
+	)
+      )
+      (box
+        :class "OptionButton"
+        (label
+	  :class "symbol OptionButton-label"
+          :text "󰛳"
+	)
+      )
+    )
+    (box)
+
+    (label
+      :class "SubsectionTitle"
+      :text "Batteries"
+      :halign "start"
+    )
+    (scroll
+    :height 158
+    (box
+      :space-evenly false
+      :orientation "vertical"
+      :spacing 10
+
+      (box
+        :orientation "vertical"
+        :space-evenly false
+	:class "Battery"
+	:spacing 10
+
+        (centerbox
+	  :space-evenly false
+
+          (box
+	    :space-evenly false
+	    :spacing 5
+
+            (label
+              :text "󰂑"
+	      :class "Battery-symbol symbol"
+	    )
+            (label
+              :text "?%"
+	      :class "Battery-percentage"
+	      :halign "start"
+	    )
+	  )
+          (box)
+	  (label
+            :text "BAT0"
+	    :class "Battery-name"
+	    :valign "start"
+	    :halign "end"
+	  )
+	)
+	(progress
+          :value 0
+	  :thickness 10
+	)
+      )
+
+      (box
+        :orientation "vertical"
+        :space-evenly false
+	:class "Battery"
+	:spacing 10
+
+        (centerbox
+	  :space-evenly false
+
+          (box
+	    :space-evenly false
+	    :spacing 5
+
+            (label
+              :text "󰁾"
+	      :class "Battery-symbol symbol"
+	    )
+            (label
+              :text "96%"
+	      :class "Battery-percentage"
+	      :halign "start"
+	    )
+	  )
+          (box)
+	  (label
+            :text "BAT1"
+	    :class "Battery-name"
+	    :valign "start"
+	    :halign "end"
+	  )
+	)
+	(progress
+          :value 96
+	  :thickness 10
+	)
+      )
+    )
+    )
+  )
+)
+
+(defwindow cpanel
+  :monitor 0
+  :geometry (geometry :x "-10px"
+    :y "52px"
+    :height "94%"
+    :width "400px"
+    :anchor "top right")
+  :stacking "fg"
+  :wm-ignore true
+(cpanelwidget))

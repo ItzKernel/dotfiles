@@ -1,0 +1,10 @@
+#!/bin/bash
+
+for device in /sys/block/*
+do
+    if [ -d "$device" ] && udevadm info --query=property --path="$device" | grep -q ^ID_BUS=usb; then
+        echo "${device##*/}" # This prints just the device name (e.g., sdb)
+    fi
+done
+
+# mount -o gid=storage,fmask=007,dmask=007 $1 $2

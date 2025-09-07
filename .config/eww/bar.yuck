@@ -1,0 +1,87 @@
+(defpoll time :interval "1s"
+  `date "+%b %d %H:%M"`)
+(defpoll BAT0 :interval "5s"
+  `batt_icon BAT0`)
+(defpoll BAT1 :interval "5s"
+  `batt_icon BAT1`)
+(defpoll current_window :interval "1s"
+  `bspc query -T -n $(bspc query -N focused -n)`)
+
+(defwidget workspace [wp symbol]
+  (button 
+    :onclick "bspc desktop ^${wp} -f"
+    (label :class "symbol" :text "${symbol}")
+  )
+)
+
+(defwidget barwidget []
+  (centerbox
+    (box
+    	(box
+	    :halign "start"
+      :spacing 16
+      :space-evenly false
+    	(label :class "symbol icon" :text "󰣇")
+    	(label :text "${current_window.client.className}")
+	    )
+    )
+    (box 
+      :class "center"
+      :spacing 8
+      (workspace :wp "1" :symbol "󰅖")
+      (workspace :wp "2" :symbol "󰔶")
+      (workspace :wp "3" :symbol "󰧞")
+      (workspace :wp "4" :symbol "󰝤")
+      (workspace :wp "5" :symbol "󰐕")
+    )
+    (box
+      (box
+        :space-evenly false
+        :spacing 16
+        :halign "end"
+        (box
+          :spacing 8
+          :space-evenly false
+          (systray
+            :icon-size 18
+            :spacing 8
+            :space-evenly false
+            :halign "end"
+          )
+          (box
+            :spacing 8
+            (tooltip 
+              (label :text "wifi")
+              (label :class "symbol" :text "󰤨")
+            )
+            (tooltip 
+              (label :text "Capacity: ${EWW_BATTERY.BAT0.capacity}%")
+              (label :class "symbol" :text "${BAT0}")
+            )
+            (tooltip 
+              (label :text "Capacity: ${EWW_BATTERY.BAT1.capacity}%")
+              (label :class "symbol" :text "${BAT1}")
+            )
+          )
+        )
+        (eventbox
+	  :onclick "eww open cpanel"
+          (label :text time)
+	)
+      )
+    )
+  )
+)
+
+(defwindow bar
+  :monitor 0
+  :geometry (geometry :x "0px"
+    :y "0px"
+    :width "100%"
+    :height "40px"
+    :anchor "top center")
+  :stacking "fg"
+  :reserve (struts :distance "40px" :side "top")
+  :windowtype "dock"
+  :wm-ignore false
+(barwidget))
