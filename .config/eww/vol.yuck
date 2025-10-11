@@ -1,0 +1,74 @@
+; this is shit.
+; this is the only way i managed to get that shitty ass toggle animation
+; working in eww. i fucking hate this.
+
+(deflisten vol
+  :initial 100
+  `~/.local/bin/vollisten`
+)
+(deflisten mute
+  :initial false
+  `~/.local/bin/mutelisten`
+)
+(defvar voltoggle false)
+
+(defwidget volwidget []
+  (centerbox
+    :vexpand true
+    (box)
+    (expander
+      :expanded true
+      :vexpand true
+
+      (revealer
+        :reveal voltoggle
+        :transition "slideleft"
+        :duration "500ms"
+        :vexpand true
+
+        (centerbox
+          :orientation "horizontal"
+          :vexpand true
+
+          (box)
+          (box
+            :orientation "vertical"
+            :space-evenly false
+            :spacing 16
+            :class "bicsessz"
+            :width 48
+            :vexpand true
+
+            (centerbox 
+              :vexpand true
+              (box)
+                (progress
+                  :orientation "vertical"
+                  :value vol
+                  :flipped true
+                  :class "Geci"
+                  :vexpand true
+                )
+              (box)
+            )
+            (label :class "symbol" :text "${mute ? "󰝟" : "󰕾"}")
+          )
+          (box :width "${48 + 12 * 3}")
+        )
+      )
+    )
+    (box)
+  )
+)
+
+(defwindow vol
+  :monitor 0
+  :geometry (geometry :x "${48 + 12 * 2}px"
+    :y "0px"
+    :width "${48*2 + 12}px"
+    :height "256px"
+    :anchor "center right")
+  :stacking "fg"
+  :windowtype "desktop"
+  :wm-ignore true
+(volwidget))

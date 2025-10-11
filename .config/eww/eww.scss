@@ -36,9 +36,21 @@ $zinc-950: #09090b;
   color: $zinc-200;
 }
 
+.vol {
+  background-color: transparent;
+}
+.miert {
+  padding: 5px;
+}
+.bicsessz {
+  background-color: $zinc-950;
+  padding: 24px 0;
+  border-radius: 8px;
+}
+
 .cpanel {
   background-color: $zinc-950;
-  border-radius: 10px;
+  border-radius: 8px;
   color: $zinc-200;
   padding: 24px;
 
@@ -127,3 +139,33 @@ progressbar {
 progressbar progress {
   background-color: $zinc-900;
 }
+
+progressbar > trough {
+}
+
+.Geci {
+  // width: 100px;
+  all: unset;
+  background-color: $zinc-800;
+    border-radius: 8px;
+
+  progress {
+    background-color: $zinc-200;
+    border-radius: 8px;
+  }
+
+  > trough {
+    min-width: 10px;
+  }
+}
+
+.bruh {
+  min-width: 10px;
+}
+
+.vol {
+  padding: 16px 0px;
+  border-radius: 8px;
+}
+
+

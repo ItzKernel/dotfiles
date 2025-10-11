@@ -1,3 +1,4 @@
 (include "bar.yuck")
 (include "batt_low.yuck")
 (include "cpanel.yuck")
+(include "vol.yuck")
