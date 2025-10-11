@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Function to get the current mute status
+get_mute_status() {
+    pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}'
+}
+
+# Get the initial mute status
+current_mute_status=$(get_mute_status)
+[[ "$current_mute_status" == "yes" ]] && echo "true" || echo "false"
+
+# Subscribe to PulseAudio events
+pactl subscribe | grep --line-buffered "sink" | while read line; do
+    new_mute_status=$(get_mute_status)
+    if [ "$new_mute_status" != "$current_mute_status" ]; then
+        [[ "$new_mute_status" == "yes" ]] && echo "true" || echo "false"
+
+        # echo $new_mute_status
+        current_mute_status=$new_mute_status
+    fi
+done
+

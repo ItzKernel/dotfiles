@@ -1,0 +1,32 @@
+#!/bin/bash
+
+if [ "$1" = "increase" ]; then
+  pactl set-sink-volume @DEFAULT_SINK@ +10%
+elif [ "$1" = "decrease" ]; then
+  pactl set-sink-volume @DEFAULT_SINK@ -10%
+elif [ "$1" = "mute" ]; then
+  pactl set-sink-mute @DEFAULT_SINK@ toggle
+else
+  echo "error: bad argument"
+fi
+
+# set the counter to 3 whenever the script runs
+
+if [ -f /tmp/voltoggle ]; then
+  echo 3 > /tmp/voltoggle
+else
+  echo 3 > /tmp/voltoggle
+  eww update voltoggle=true
+  countdown=$(cat /tmp/voltoggle)
+  countdown=$(($countdown))
+
+  while [ "$countdown" -gt "0" ]; do
+    countdown=$(cat /tmp/voltoggle)
+    countdown=$(($countdown))
+    echo $((countdown - 1)) > /tmp/voltoggle
+    sleep 0.3
+  done
+
+  rm /tmp/voltoggle
+  eww update voltoggle=false
+fi
