@@ -17,11 +17,16 @@ bspc rule -a Chromium desktop='^2'
 bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
+bspc rule -a koca state=floating layer=above
+# bspc rule -a vol state=floating follow=on layer=above
 
 bspc config focus_follows_pointer true
-~/wall.sh
+wall.sh
 xsetroot -cursor_name left_ptr
 picom &
 eww open bar
+eww open vol
 syndaemon -i 0.5 -t -K -R -d
 redshift -l 46.1998:18.9578
+flameshot &
+mullvad-vpn &
