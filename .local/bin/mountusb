@@ -1,3 +1,4 @@
 #!/bin/bash
 
+# am retarded i should make the fmask and dmask include group
 mount -o gid=storage,fmask=007,dmask=007 $1 $2
