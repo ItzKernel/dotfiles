@@ -24,13 +24,13 @@ ctrl + End
 	flameshot gui
 
 XF86AudioLowerVolume
-	pactl set-sink-volume @DEFAULT_SINK@ -10%
+	volcontrol decrease
 
 XF86AudioRaiseVolume
-	pactl set-sink-volume @DEFAULT_SINK@ +10%
+	volcontrol increase
 
 XF86AudioMute
-	pactl set-sink-mute @DEFAULT_SINK@ toggle
+	volcontrol mute
 
 XF86MonBrightnessDown
 	brightnessctl set 10%-
@@ -123,3 +123,6 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+super + e
+	bspc node '@parent' -R 90
