@@ -23,10 +23,12 @@ bspc rule -a koca state=floating layer=above
 bspc config focus_follows_pointer true
 wall.sh
 xsetroot -cursor_name left_ptr
+syndaemon -i 0.5 -t -K -R -d &
+redshift -l 46.1998:18.9578 &
 picom &
-eww open bar
-eww open vol
-syndaemon -i 0.5 -t -K -R -d
-redshift -l 46.1998:18.9578
 flameshot &
 mullvad-vpn &
+eww daemon
+eww open bar
+eww open vol
+syncthing &
